@@ -1,35 +1,23 @@
 /*http://cs.union.edu/~striegnk/learn-prolog-now/html/node61.html#subsec.l7.anbn*/
-/*
-s1([Head|Tail],[]) :-
-	terma([Head]),
-	termc(Tail).	
-	
-terma([X]) :-
-	X = a.
-termc([Head2|True_tail]) :- 
-	Head2 = c,
-	s1(True_tail, []).
-*/
-
 
 s1 --> d.
-s1 --> d,st.
-st --> d,st.
-d([], []) :- !.
+s1 --> d,s1.
 d --> [a,c].
-d([], []) :- !.
-
-
-
 
 /*
 s1(A,B) :-
 	d(A,B).
+
 s1(A,C) :-
 	d(A,B),
 	s1(B,C).
 
 d([a,c|A],A).
+
+st(A,C) :-
+	d(A,B),
+	st(B,C).
+
 */
 
 
