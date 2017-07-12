@@ -1,20 +1,82 @@
+/*http://cs.union.edu/~striegnk/learn-prolog-now/html/node61.html#subsec.l7.anbn*/
 /*
-terminal(a).
-terminal(c).
+s1([Head|Tail],[]) :-
+	terma([Head]),
+	termc(Tail).	
+	
+terma([X]) :-
+	X = a.
+termc([Head2|True_tail]) :- 
+	Head2 = c,
+	s1(True_tail, []).
 */
-head_term(a).
-tail_term(c).
-head([X|Y]) :- head_term(X), head(Y).
-head([X]) :- head_term(X).
-tail([X|Y]) :- tail_term(X), tail(Y).
-tail([X]) :- tail_term(Y).
-sentence([X|Y]) :- head(X).
-sentence([X|Y]) :- tail(X).
-sentence([X|Y]) :- head(X), tail(Y).
+
+
+s1 --> d.
+s1 --> d,st.
+st --> d,st.
+d([], []) :- !.
+d --> [a,c].
+d([], []) :- !.
+
+
+
+
 /*
-r1([A,B]) :- head_term(A), tail_term(B).
-head([X|_]) :- head_term(X).
-sentence([X,Y]) :- head_term(X) , tail_term(Y).
-sentence([X,Y]) :- head_term(X) , tail(Y).
-sentence([X,Y]) :- head(X) , tail_term(Y).
+s1(A,B) :-
+	d(A,B).
+s1(A,C) :-
+	d(A,B),
+	s1(B,C).
+
+d([a,c|A],A).
 */
+
+
+/*
+s2(A,C) :-
+	a(A,B),
+	c(B,C).
+
+a([],[]) :- !.
+
+a([a|A], B) :-
+	a(A,B).
+
+a([a|A], A).
+
+c([], []) :- !.
+
+c([c|A],B) :-
+	c(A,B).
+
+c([c|A], A).
+*/
+
+s2 --> a,c.
+a --> [a],a.
+a --> [a].
+c --> [c],c.
+c --> [c].
+
+
+s3 --> g,h.
+g --> [c],g.
+g --> [c].
+h -->[a],h.
+h --> [a].
+
+none(X,_) :- 
+	not( s1(X,[])),
+	not( s2(X,[])),
+	not( s3(X,[])).
+ambig(X,_) :-
+	s1(X,[]),
+	s2(X,[]).
+ambig(X,_) :-
+	s2(X,[]),
+	s3(X,[]).
+ambig(X,_) :-
+	s1(X,[]),
+	s3(X,[]).
+
