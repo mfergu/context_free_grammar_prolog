@@ -26,12 +26,17 @@ none(X,_) :-
 	not( s3(X,[])).
 
 ambig(X,_) :-
+	ambig1(X,_);
+	ambig2(X,_);
+	ambig3(X,_).
+
+ambig1(X,_) :-
 	s1(X,[]),
 	s2(X,[]).
-ambig(X,_) :-
+ambig2(X,_) :-
 	s2(X,[]),
 	s3(X,[]).
-ambig(X,_) :-
+ambig3(X,_) :-
 	s1(X,[]),
 	s3(X,[]).
 
